@@ -6,71 +6,30 @@
 
     <div class="ui container">
       <div class="ui icon massive input loading">
-      <input class="search loading" type="text" placeholder="Search...">
-      <i class="search icon"></i>
+      <input
+        class="search loading"
+        type="text"
+        v-model="search_field"
+        placeholder="Search..."
+        v-on:keyup="is_search=false"
+        v-on:keydown="is_search=true"
+      >
+      <i class="search icon" v-if="is_search"></i>
     </div>
       <table class="ui celled table">
         <thead>
-        <th>Employee</th>
-        <th>Correct Guesses</th>
+        <th>Base form</th>
+        <th>Past Simple (V2)</th>
+        <th>Past Participle (V3)</th>
         </thead>
         <tbody>
-        <tr>
-          <td>
-            <h4 class="ui image header"></h4>
-            <img src="assets/images/wireframe/square-image.png" class="ui mini rounded image">
-            <div class="content">
-              Lena
-              <div class="sub header">Human Resources
-              </div>
-            </div>
-          </td>
-          <td>
-            22
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h4 class="ui image header"></h4>
-            <img src="assets/images/wireframe/square-image.png" class="ui mini rounded image">
-            <div class="content">
-              Matthew
-              <div class="sub header">Fabric Design
-              </div>
-            </div>
-          </td>
-          <td>
-            15
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h4 class="ui image header"></h4>
-            <img src="assets/images/wireframe/square-image.png" class="ui mini rounded image">
-            <div class="content">
-              Lindsay
-              <div class="sub header">Entertainment
-              </div>
-            </div>
-          </td>
-          <td>
-            12
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <h4 class="ui image header"></h4>
-            <img src="assets/images/wireframe/square-image.png" class="ui mini rounded image">
-            <div class="content">
-              Mark
-              <div class="sub header">Executive
-              </div>
-            </div>
-          </td>
-          <td>
-            11
-          </td>
-        </tr>
+          <table-item
+            v-for="item in filteredVerbs"
+            :key="item.base_form"
+            v-bind:items="item"
+          >
+
+          </table-item>
         </tbody>
       </table>
     </div>
@@ -79,8 +38,27 @@
 
 <script>
 
+  import TableItem from './TableItem'
+
   export default {
-    name: 'tableContent'
+    name: 'tableContent',
+    components: {
+      TableItem
+    },
+    data () {
+      return {
+        search_field: '',
+        is_search: false
+      }
+    },
+    props: ['data'],
+    computed: {
+      filteredVerbs: function() {
+        return this.data.filter(
+          value => value.searchedfield.toLowerCase().indexOf(this.search_field.toLowerCase()) >= 0
+        )
+      }
+    }
   }
 </script>
 <style>

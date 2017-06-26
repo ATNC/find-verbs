@@ -1,23 +1,28 @@
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
-    <table-content></table-content>
+    <table-content v-bind:data="verbs"></table-content>
   </div>
 </template>
 
 <script>
-import TableContent from './components/TableContent'
-
-export default {
-  name: 'app',
-  components: {
-    TableContent
+  import TableContent from './components/TableContent'
+  import verbsData from './verbs.json'
+  export default {
+    name: 'app',
+    components: {
+      TableContent
+    },
+    data () {
+      return {
+        verbs: verbsData
+      }
+    }
   }
-}
 </script>
 
 <style>
-/*#app {*/
+  /*#app {*/
 
 
 
