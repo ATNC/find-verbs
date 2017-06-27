@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!--<img src="./assets/logo.png">-->
     <table-content v-bind:data="verbs"></table-content>
   </div>
 </template>
@@ -22,7 +21,6 @@
 </script>
 
 <style>
-  /*#app {*/
 
 
 
